@@ -12,6 +12,7 @@ BuildRequires:	imagemagick
 BuildRequires:	cmake
 BuildRequires:	simgear-devel >= 2.4.0
 BuildRequires:	openscenegraph-devel >= 3.0.0
+BuildRequires:	boost-devel
 Requires:	flightgear >= 2.4.0
 
 %description
