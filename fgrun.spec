@@ -13,6 +13,8 @@ BuildRequires:	cmake
 BuildRequires:	simgear-devel >= 2.4.0
 BuildRequires:	openscenegraph-devel >= 3.0.0
 BuildRequires:	boost-devel
+BuildRequires:	libxft-devel
+BuildRequires:	libxinerama-devel
 Requires:	flightgear >= 2.4.0
 
 %description
