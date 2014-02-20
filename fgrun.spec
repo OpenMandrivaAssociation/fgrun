@@ -1,41 +1,67 @@
 Summary:	Graphical launcher for the FlightGear flight simulator
 Name:		fgrun
-Version:	1.6.2
+Version:	1.7.0
 Release:	1
-License:	GPLv2
+License:	GPLv2+
 Group:		Games/Other
-URL:		http://sourceforge.net/projects/fgrun/
-Source0:	http://prdownloads.sourceforge.net/fgrun/%{name}-%{version}.tar.bz2
+Url:		http://sourceforge.net/projects/fgrun/
+Source0:	http://prdownloads.sourceforge.net/fgrun/%{name}-%{version}.tar.gz
 Source1:	flightgear.png
-Patch0:		fgrun-1.6.2-linkage.patch
-BuildRequires:	fltk-devel >= 1.1.0
-BuildRequires:	imagemagick
+Patch0:		fgrun-1.6.1-fedora-fix-crash-when-setting-defaults.patch
+Patch1:		fgrun-1.6.2-default-settings-for-rosa.patch
+Patch2:		fgrun-1.6.2-fedora-fix-reloadpath-logic.patch
+Patch3:		fgrun-1.6.2-fix-strings.patch
+Patch4:		fgrun-1.6.2-linkage.patch
+Patch5:		fgrun-1.7.0-fedora-build-fgrun-with-static-ui-libs.patch
 BuildRequires:	cmake
-BuildRequires:	simgear-devel >= 2.4.0
-BuildRequires:	openscenegraph-devel >= 3.0.0
+BuildRequires:	imagemagick
 BuildRequires:	boost-devel
+BuildRequires:	fltk-devel >= 1.3.0
+BuildRequires:	simgear-devel
+BuildRequires:	pkgconfig(openscenegraph)
 BuildRequires:	pkgconfig(xft)
 BuildRequires:	pkgconfig(xinerama)
-Requires:	flightgear >= 2.4.0
+Requires:	flightgear
 
 %description
 fgrun is a graphical launcher for the FlightGear flight simulator.
 
+%files -f %{name}.lang
+%doc README COPYING NEWS AUTHORS
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_miconsdir}/%{name}.png
+%{_liconsdir}/%{name}.png
+%{_iconsdir}/%{name}.png
+%{_sysconfdir}/fltk/flightgear.org/fgrun.prefs
+
+#----------------------------------------------------------------------------
+
 %prep
-%setup -q
+%setup -q -n fg-fgrun
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
-cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=Release
+#cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=Release
+%cmake_qt4
 %make
 
 %install
-%makeinstall_std
+%makeinstall_std -C build
+
+mkdir -p %{buildroot}%{_sysconfdir}/fltk/flightgear.org
+install -m 0644 fgrun.prefs \
+	%{buildroot}%{_sysconfdir}/fltk/flightgear.org/fgrun.prefs
 
 %find_lang %{name}
 
-%__mkdir_p %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{name}
 Comment=Graphical launcher for the FlightGear flight simulator
@@ -47,26 +73,9 @@ StartupNotify=false
 Categories=Game;Simulation;
 EOF
 
-%__mkdir_p %{buildroot}%{_miconsdir}
-%__mkdir_p %{buildroot}%{_liconsdir}
+mkdir -p %{buildroot}%{_miconsdir}
+mkdir -p %{buildroot}%{_liconsdir}
 convert -size 16x16 %{SOURCE1} %{buildroot}%{_miconsdir}/%{name}.png
 convert -size 48x48 %{SOURCE1} %{buildroot}%{_liconsdir}/%{name}.png
-%__install -m 644 %{SOURCE1} %{buildroot}%{_iconsdir}/%{name}.png
-
-%files -f %{name}.lang
-%doc README COPYING NEWS AUTHORS
-%{_bindir}/%{name}
-%{_datadir}/applications/mandriva-%{name}.desktop
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-
-
-
-%changelog
-* Fri Oct 14 2011 Andrey Bondrov <abondrov@mandriva.org> 1.6.0-1mdv2011.0
-+ Revision: 704672
-- Add libxft-devel and libxinerama-devel to BuildRequires
-- Add boost-devel to BuildRequires
-- imported package fgrun
+install -m 644 %{SOURCE1} %{buildroot}%{_iconsdir}/%{name}.png
 

@@ -1,0 +1,15 @@
+--- fg-fgrun/src/CMakeLists.txt.orig	2013-01-06 06:46:06.000000000 +0800
++++ fg-fgrun/src/CMakeLists.txt	2013-03-04 09:52:42.949628289 +0800
+@@ -16,10 +16,10 @@
+ endif (MSVC)
+ 
+ FLTK_WRAP_UI(Wizard wizard.fl)
+-add_library(Wizard ${Wizard_FLTK_UI_SRCS})
++add_library(Wizard STATIC ${Wizard_FLTK_UI_SRCS})
+ 
+ FLTK_WRAP_UI(Advanced advanced.fl)
+-add_library(Advanced ${Advanced_FLTK_UI_SRCS})
++add_library(Advanced STATIC ${Advanced_FLTK_UI_SRCS})
+ 
+ set( ui_libs_1_3 Wizard Advanced )
+ 

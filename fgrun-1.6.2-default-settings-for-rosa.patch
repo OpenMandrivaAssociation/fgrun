@@ -1,0 +1,15 @@
+--- fgrun-1.6.2/fgrun.prefs.orig	2012-07-20 00:38:13.000000000 +0200
++++ fgrun-1.6.2/fgrun.prefs	2012-09-11 13:42:32.984630929 +0200
+@@ -4,8 +4,9 @@
+ 
+ [.]
+ 
+-fg_exe:/usr/local/bin/fgfs
+-fg_root:/usr/local/lib/FlightGear/data
+-fg_scenery:/usr/local/lib/FlightGear/data/Scenery
++fg_exe:/usr/bin/fgfs
++fg_root:/usr/share/games/flightgear
++fg_scenery:/usr/share/games/flightgear/Scenery
++ts_exe:/usr/bin/terrasync
+ aircraft:c172-3d
+ airport:KSFO
