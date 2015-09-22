@@ -1,17 +1,15 @@
 Summary:	Graphical launcher for the FlightGear flight simulator
 Name:		fgrun
-Version:	1.7.0
-Release:	2
+Version:	3.4.0
+Release:	1
 License:	GPLv2+
 Group:		Games/Other
 Url:		http://sourceforge.net/projects/fgrun/
-Source0:	http://prdownloads.sourceforge.net/fgrun/%{name}-%{version}.tar.gz
+Source0:	https://github.com/FlightGear/fgrun/archive/version/%{name}-version-%{version}-final.tar.gz
 Source1:	flightgear.png
 Patch0:		fgrun-1.6.1-fedora-fix-crash-when-setting-defaults.patch
 Patch1:		fgrun-1.6.2-default-settings-for-rosa.patch
-Patch2:		fgrun-1.6.2-fedora-fix-reloadpath-logic.patch
-Patch3:		fgrun-1.6.2-fix-strings.patch
-Patch4:		fgrun-1.6.2-linkage.patch
+Patch2:		0004-Fix-reloadPath-logic.patch
 Patch5:		fgrun-1.7.0-fedora-build-fgrun-with-static-ui-libs.patch
 BuildRequires:	cmake
 BuildRequires:	imagemagick
@@ -38,13 +36,8 @@ fgrun is a graphical launcher for the FlightGear flight simulator.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n fg-fgrun
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%setup -q -n fgrun-version-%{version}-final
+%apply_patches
 
 %build
 #cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=Release
