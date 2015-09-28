@@ -8,8 +8,8 @@
 -fg_root:/usr/local/lib/FlightGear/data
 -fg_scenery:/usr/local/lib/FlightGear/data/Scenery
 +fg_exe:/usr/bin/fgfs
-+fg_root:/usr/share/games/flightgear
-+fg_scenery:/usr/share/games/flightgear/Scenery
++fg_root:/usr/share/flightgear
++fg_scenery:/usr/share/flightgear/Scenery
 +ts_exe:/usr/bin/terrasync
  aircraft:c172-3d
  airport:KSFO
