@@ -37,7 +37,7 @@ fgrun is a graphical launcher for the FlightGear flight simulator.
 
 %prep
 %setup -q -n fgrun-version-%{version}-final
-%apply_patches
+%autopatch -p1
 
 %build
 #cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=Release
