@@ -4,7 +4,7 @@ Version:	3.4.0
 Release:	3
 License:	GPLv2+
 Group:		Games/Other
-Url:		http://sourceforge.net/projects/fgrun/
+Url:		https://sourceforge.net/projects/fgrun/
 Source0:	https://github.com/FlightGear/fgrun/archive/version/%{name}-version-%{version}-final.tar.gz
 Source1:	flightgear.png
 Patch0:		fgrun-1.6.1-fedora-fix-crash-when-setting-defaults.patch
